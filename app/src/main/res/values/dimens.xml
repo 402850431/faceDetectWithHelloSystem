@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="tiny_margin">4dp</dimen>
+    <dimen name="tiny_small_margin">6dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
+    <dimen name="middle_small_margin">12dp</dimen>
+    <dimen name="middle_margin">16dp</dimen>
+    <dimen name="middle_large_margin">20dp</dimen>
+    <dimen name="large_margin">24dp</dimen>
+    <dimen name="super_large_margin">48dp</dimen>
+
+    <dimen name="divider_height">1dp</dimen>
+
+    <!--<dimen name="tiny_image_size">20dp</dimen>-->
+    <!--<dimen name="small_image_size">28dp</dimen>-->
+    <!--<dimen name="small_middle_image_size">34dp</dimen>-->
+    <!--<dimen name="middle_image_size">48dp</dimen>-->
+    <!--<dimen name="middle_large_image_size">60dp</dimen>-->
+    <!--<dimen name="large_image_size">92dp</dimen>-->
+
+    <dimen name="tiny_text_size">12sp</dimen>
+    <dimen name="small_text_size">14sp</dimen>
+    <dimen name="middle_small_text_size">16sp</dimen>
+    <dimen name="middle_text_size">18sp</dimen>
+    <dimen name="middle_large_text_size">20sp</dimen>
+    <dimen name="large_text_size">24sp</dimen>
+    <dimen name="extra_large_text_size">40sp</dimen>
+
+    <dimen name="test_tiny_image_size">12dp</dimen>
+    <dimen name="test_small_image_size">24dp</dimen>
+    <dimen name="test_middle_small_image_size">36dp</dimen>
+    <dimen name="test_middle_image_size">48dp</dimen>
+    <dimen name="test_home_image_size">61dp</dimen>
+    <dimen name="test_large_image_size">72dp</dimen>
+    <dimen name="test_larger_image_size">120dp</dimen>
+    <dimen name="test_ex_larger_image_size">200dp</dimen>
+    <dimen name="test_image_size">280dp</dimen>
+    <dimen name="test_ex_image_size">360dp</dimen>
+
+    <declare-styleable name="TextImageView">
+        <attr name="drawableLeftWidth" format="dimension"/>
+        <attr name="drawableLeftHeight" format="dimension"/>
+        <attr name="drawableTopWidth" format="dimension"/>
+        <attr name="drawableTopHeight" format="dimension"/>
+        <attr name="drawableRightWidth" format="dimension"/>
+        <attr name="drawableRightHeight" format="dimension"/>
+        <attr name="drawableBottomWidth" format="dimension"/>
+        <attr name="drawableBottomHeight" format="dimension"/>
+    </declare-styleable>
+</resources>

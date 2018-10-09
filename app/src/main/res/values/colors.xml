@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="lightRed">#ed1a3b</color>
+    <color name="darkRed">#DA001B</color>
+    <color name="gray">#9b9b9b</color>
+    <color name="darkGray">#4a494a</color>
+    <color name="black">#4a4a4a</color>
+    <color name="lightGray">#f6f6f6</color>
+    <color name="lightPink">#F8D2D4</color>
+    <color name="white">#ffffff</color>
+    <color name="darkOrange">#FA6D6E</color>
+    <color name="orange">#FDA62F</color>
+    <color name="yellow">#FECC34</color>
+    <color name="green">#90D14F</color>
+    <color name="lightBlue">#6ED0DD</color>
+    <color name="blue">#3e789d</color>
+    <color name="purple">#7D38FB</color>
+    <color name="halfTransparent">#80000000</color>
+    <color name="alphaSixtyTransparent">#99000000</color>
+    <color name="alphaEightyTransparent">#CC000000</color>
+    <color name="albumBackground">#eeeeee</color>
+</resources>
