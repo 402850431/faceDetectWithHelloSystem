@@ -3,4 +3,11 @@
     <string name="image">image</string>
     <string name="faceDetectAndSayHello">人臉偵測打招呼</string>
     <string name="lexiconManagement">詞庫管理</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="newLexicon">新增</string>
+    <string name="chooseLexicon">選擇詞庫</string>
+    <string name="lexiconName">詞庫名稱</string>
+    <string name="features">操作項目</string>
 </resources>

@@ -4,56 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:id="@+id/mainFrame"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/guideline"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline2"
-        android:layout_margin="@dimen/small_margin">
 
         <com.example.user.facedetectwithhellosystem.tools.SquareImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/faceDetectAndSayHelloImg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:background="@drawable/button_oval"
             android:contentDescription="@string/image"
-            android:padding="@dimen/large_margin"/>
+            android:padding="@dimen/large_margin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guideline2"
+            android:layout_margin="@dimen/small_margin"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/faceDetectAndSayHelloTv"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/faceDetectAndSayHello"
-            android:drawableTop="@drawable/button_oval"/>
+            android:drawableTop="@drawable/button_oval"
+            android:textAlignment="center"
+            android:gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/faceDetectAndSayHelloImg"
+            app:layout_constraintRight_toLeftOf="@id/guideline"/>
 
-    </LinearLayout>
 
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintLeft_toRightOf="@id/guideline"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline2"
-        app:layout_constraintRight_toLeftOf="@id/guideline3"
-        android:layout_margin="@dimen/small_margin">
 
         <com.example.user.facedetectwithhellosystem.tools.SquareImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/lexiconManagementImg"
             android:background="@drawable/button_oval"
-            android:contentDescription="@string/image"/>
+            android:contentDescription="@string/image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toRightOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guideline2"
+            app:layout_constraintRight_toLeftOf="@id/guideline3"
+            android:layout_margin="@dimen/small_margin"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/lexiconManagement"/>
-    </LinearLayout>
+    <TextView
+        android:id="@+id/lexiconManagementTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/lexiconManagement"
+        android:textAlignment="center"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/lexiconManagementImg"
+        app:layout_constraintLeft_toRightOf="@id/guideline"
+        app:layout_constraintRight_toRightOf="@id/guideline3"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
