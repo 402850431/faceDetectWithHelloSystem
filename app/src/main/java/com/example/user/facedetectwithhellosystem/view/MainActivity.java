@@ -1,9 +1,10 @@
-package com.example.user.facedetectwithhellosystem;
+package com.example.user.facedetectwithhellosystem.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.user.facedetectwithhellosystem.R;
 import com.example.user.facedetectwithhellosystem.tools.ReplaceFragment;
 import com.example.user.facedetectwithhellosystem.tools.SquareImageView;
 
@@ -35,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void findViewByIds() {
-
         faceDetectImg = findViewById(R.id.faceDetectAndSayHelloImg);
         lexiconImg = findViewById(R.id.lexiconManagementImg);
 

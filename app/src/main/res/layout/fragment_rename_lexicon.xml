@@ -20,10 +20,10 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/lexiconName" />
+            android:text="@string/oldLexiconName" />
 
         <EditText
-            android:id="@+id/newLexiconEt"
+            android:id="@+id/oldLexiconEt"
             android:layout_width="@dimen/test_image_size"
             android:maxLength="99"
             android:layout_height="match_parent" />
@@ -39,16 +39,16 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/newFeedBackWord" />
+            android:text="@string/newLexiconName" />
 
         <EditText
-            android:id="@+id/newWordEt"
+            android:id="@+id/newLexiconEt"
             android:layout_width="@dimen/test_image_size"
             android:maxLength="99"
             android:layout_height="match_parent"/>
 
         <ImageView
-            android:id="@+id/newWordImg"
+            android:id="@+id/renameImg"
             android:layout_width="@dimen/test_middle_image_size"
             android:layout_height="match_parent"
             android:padding="@dimen/small_margin"

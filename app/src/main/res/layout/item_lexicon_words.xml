@@ -9,10 +9,6 @@
     android:padding="@dimen/small_margin"
     tools:context=".view.NewLexiconFragment">
 
-    <!--<CheckBox-->
-        <!--android:id="@+id/checkbox"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
 
         <TextView
             android:id="@+id/wordTv"
@@ -35,24 +31,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                app:layout_widthPercent="30%"
+                app:layout_widthPercent="40%"
                 android:text="@string/edit" />
 
             <Button
-                android:id="@+id/chooseBtn"
+                android:id="@+id/deleteBtn"
                 android:layout_toEndOf="@id/editBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                app:layout_widthPercent="30%"
-                android:gravity="center"
-                android:text="@string/choose" />
-
-            <Button
-                android:id="@+id/deleteBtn"
-                android:layout_toEndOf="@id/chooseBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:layout_widthPercent="30%"
+                app:layout_widthPercent="40%"
                 android:gravity="center"
                 android:text="@string/delete" />
 

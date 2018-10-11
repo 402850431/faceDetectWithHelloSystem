@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:id="@+id/mainFrame"
-    tools:context=".MainActivity">
+    tools:context=".view.MainActivity">
 
 
         <com.example.user.facedetectwithhellosystem.tools.SquareImageView

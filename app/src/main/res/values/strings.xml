@@ -9,8 +9,22 @@
     <string name="newLexicon">新增</string>
     <string name="chooseLexicon">選擇詞庫</string>
     <string name="lexiconName">詞庫名稱</string>
+    <string name="oldLexiconName">舊詞庫名稱</string>
+    <string name="newLexiconName">新詞庫名稱</string>
     <string name="features">操作項目</string>
     <string name="edit">編輯</string>
     <string name="choose">選擇</string>
     <string name="delete">刪除</string>
+    <string name="word">word</string>
+    <string name="newFeedBackWord">新增回饋詞</string>
+    <string name="editSuccess">修改成功</string>
+    <string name="newSuccess">新增成功</string>
+    <string name="deleteSuccess">刪除成功</string>
+    <string name="deleteFailed">刪除失敗</string>
+    <string name="wordName">字詞名稱</string>
+    <string name="lexiconNotExist">詞庫不存在</string>
+    <string name="columnCanNotBeEmpty">欄位不可為空</string>
+    <string name="areYouSureToDelete">確定刪除?</string>
+    <string name="yes">確定</string>
+    <string name="cancel">取消</string>
 </resources>
