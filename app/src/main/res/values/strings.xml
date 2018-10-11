@@ -10,4 +10,7 @@
     <string name="chooseLexicon">選擇詞庫</string>
     <string name="lexiconName">詞庫名稱</string>
     <string name="features">操作項目</string>
+    <string name="edit">編輯</string>
+    <string name="choose">選擇</string>
+    <string name="delete">刪除</string>
 </resources>

@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.user.facedetectwithhellosystem.tools.ReplaceFragment;
+
 public class ManageLexiconFragment extends Fragment {
 
 
@@ -29,6 +31,18 @@ public class ManageLexiconFragment extends Fragment {
     }
 
     private void setUpOnClicks(View view) {
+        view.findViewById(R.id.newLexiconImg).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new ReplaceFragment(getContext()).replace(getFragmentManager(), R.id.mainFrame, new NewLexiconFragment());
+            }
+        });
+        view.findViewById(R.id.chooseLexiconImg).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new ReplaceFragment(getContext()).replace(getFragmentManager(), R.id.mainFrame, new ChooseLexiconFragment());
+            }
+        });
     }
 
     private void findViewByIds(View view) {
