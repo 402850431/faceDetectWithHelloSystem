@@ -62,7 +62,7 @@ public class ChooseLexiconAdapter extends RecyclerView.Adapter<ChooseLexiconAdap
             }
         });
 
-        holder.chooseBtn.setOnClickListener(new View.OnClickListener() {
+        holder.wordTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
@@ -72,20 +72,27 @@ public class ChooseLexiconAdapter extends RecyclerView.Adapter<ChooseLexiconAdap
             }
         });
 
+        holder.chooseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.e(">>>delete", ":)");
+
+                mySQLite.deleteTable(arrayList.get(holder.getAdapterPosition()));
+                Toast.makeText(context, R.string.deleteSuccess, Toast.LENGTH_SHORT).show();
+                arrayList.remove(holder.getAdapterPosition());
+                notifyItemRemoved(holder.getAdapterPosition());
+                /*
                 new AlertDialog.Builder(context)
                         .setTitle(R.string.areYouSureToDelete)
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mySQLite.deleteTable(arrayList.get(holder.getAdapterPosition()));
-                                Toast.makeText(context, R.string.deleteSuccess, Toast.LENGTH_SHORT).show();
-                                arrayList.remove(holder.getAdapterPosition());
-                                notifyItemChanged(holder.getAdapterPosition());
-//                                notifyDataSetChanged();
                             }
                         })
                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -94,6 +101,8 @@ public class ChooseLexiconAdapter extends RecyclerView.Adapter<ChooseLexiconAdap
                             }
                         })
                         .show();
+                */
+
             }
         });
 

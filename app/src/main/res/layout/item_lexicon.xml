@@ -20,6 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:background="@color/lightGray"
             android:text="@string/word"/>
 
         <android.support.percent.PercentRelativeLayout
