@@ -8,7 +8,7 @@
     android:gravity="center"
     android:paddingStart="@dimen/super_large_margin"
     android:paddingEnd="@dimen/small_margin"
-    tools:context=".view.NewLexiconFragment">
+    tools:context=".view.new_lexicon.NewLexiconFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout

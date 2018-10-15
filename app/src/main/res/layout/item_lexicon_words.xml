@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     android:background="@color/white"
     android:padding="@dimen/small_margin"
-    tools:context=".view.NewLexiconFragment">
+    tools:context=".view.new_lexicon.NewLexiconFragment">
 
 
         <TextView

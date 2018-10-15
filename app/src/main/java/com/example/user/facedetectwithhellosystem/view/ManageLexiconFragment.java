@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.example.user.facedetectwithhellosystem.R;
 import com.example.user.facedetectwithhellosystem.view.choose_lexicon.ChooseLexiconFragment;
 import com.example.user.facedetectwithhellosystem.tools.ReplaceFragment;
+import com.example.user.facedetectwithhellosystem.view.new_lexicon.NewLexiconFragment;
 
 public class ManageLexiconFragment extends Fragment {
 

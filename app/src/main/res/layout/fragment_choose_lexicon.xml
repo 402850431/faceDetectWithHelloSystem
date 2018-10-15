@@ -7,7 +7,7 @@
     android:paddingStart="@dimen/super_large_margin"
     android:paddingEnd="@dimen/small_margin"
     android:background="@color/white"
-    tools:context=".view.NewLexiconFragment">
+    tools:context=".view.new_lexicon.NewLexiconFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

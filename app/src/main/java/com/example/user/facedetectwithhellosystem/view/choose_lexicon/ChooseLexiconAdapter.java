@@ -3,7 +3,9 @@ package com.example.user.facedetectwithhellosystem.view.choose_lexicon;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,12 +32,23 @@ public class ChooseLexiconAdapter extends RecyclerView.Adapter<ChooseLexiconAdap
     private ArrayList<String> arrayList;
     private ArrayList<Boolean> booleanArrayList;
     private MySQLite mySQLite;
+    private int lastCheckedPosition = -1;
+    private int storedCheckedPosition;
 
+    public int getLastCheckedPosition() {
+        return lastCheckedPosition;
+    }
+
+    public void setLastCheckedPosition(int lastCheckedPosition) {
+        this.lastCheckedPosition = lastCheckedPosition;
+    }
 
     ChooseLexiconAdapter(Context context, ArrayList<String> arrayList, MySQLite mySQLite) {
         this.context = context;
         this.arrayList = arrayList;
         this.mySQLite = mySQLite;
+        SharedPreferences spf = PreferenceManager.getDefaultSharedPreferences(context);
+        storedCheckedPosition = spf.getInt("selectedLexicon", -1);
     }
 
     @Override
@@ -51,6 +65,11 @@ public class ChooseLexiconAdapter extends RecyclerView.Adapter<ChooseLexiconAdap
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.wordTv.setText(arrayList.get(position));
 
+        if (storedCheckedPosition != -1) {
+//            holder.checkBox.setChecked(true);
+        }
+
+        holder.checkBox.setChecked(holder.getAdapterPosition() == lastCheckedPosition);
 
         holder.editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,27 +91,19 @@ public class ChooseLexiconAdapter extends RecyclerView.Adapter<ChooseLexiconAdap
             }
         });
 
-        holder.chooseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.e(">>>delete", ":)");
-
-                mySQLite.deleteTable(arrayList.get(holder.getAdapterPosition()));
-                Toast.makeText(context, R.string.deleteSuccess, Toast.LENGTH_SHORT).show();
-                arrayList.remove(holder.getAdapterPosition());
-                notifyItemRemoved(holder.getAdapterPosition());
-                /*
                 new AlertDialog.Builder(context)
                         .setTitle(R.string.areYouSureToDelete)
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                mySQLite.deleteTable(arrayList.get(holder.getAdapterPosition()));
+                                Toast.makeText(context, R.string.deleteSuccess, Toast.LENGTH_SHORT).show();
+                                arrayList.remove(holder.getAdapterPosition());
+                                notifyItemRemoved(holder.getAdapterPosition());
                             }
                         })
                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -101,7 +112,6 @@ public class ChooseLexiconAdapter extends RecyclerView.Adapter<ChooseLexiconAdap
                             }
                         })
                         .show();
-                */
 
             }
         });
@@ -127,6 +137,17 @@ public class ChooseLexiconAdapter extends RecyclerView.Adapter<ChooseLexiconAdap
             chooseBtn = itemView.findViewById(R.id.chooseBtn);
             deleteBtn = itemView.findViewById(R.id.deleteBtn);
             checkBox = itemView.findViewById(R.id.checkbox);
+
+            chooseBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int copyOfLastCheckedPosition = lastCheckedPosition;
+                    lastCheckedPosition = getAdapterPosition();
+                    notifyItemChanged(copyOfLastCheckedPosition);
+                    notifyItemChanged(lastCheckedPosition);
+                }
+            });
+
         }
     }
 }

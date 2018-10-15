@@ -65,16 +65,14 @@ public class ChooseLexiconWordsAdapter extends RecyclerView.Adapter<ChooseLexico
             public void onClick(View view) {
                 Log.e(">>>delete", ":)");
 
-                mySQLite.delete(lexiconName, arrayList.get(holder.getAdapterPosition()).getId());
-                arrayList.remove(position);
-                notifyItemRemoved(position);
-                /*
                 new AlertDialog.Builder(context)
                         .setTitle(R.string.areYouSureToDelete)
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-//                                notifyDataSetChanged();
+                                mySQLite.delete(lexiconName, arrayList.get(holder.getAdapterPosition()).getId());
+                                arrayList.remove(position);
+                                notifyItemRemoved(position);
                             }
                         })
                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -83,7 +81,6 @@ public class ChooseLexiconWordsAdapter extends RecyclerView.Adapter<ChooseLexico
                             }
                         })
                         .show();
-                        */
 
             }
         });
