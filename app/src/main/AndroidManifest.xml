@@ -18,6 +18,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".view.FaceDetectNoAnalysisActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="b2578cd4300805846efdbe37d300dca886bcdfec" />
+
     </application>
 
 </manifest>

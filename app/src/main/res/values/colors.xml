@@ -23,4 +23,24 @@
     <color name="alphaSixtyTransparent">#99000000</color>
     <color name="alphaEightyTransparent">#CC000000</color>
     <color name="albumBackground">#eeeeee</color>
+
+    <color name="Red">#FA1859</color>
+    <color name="DarkRed">#320311</color>
+    <color name="Blue">#189BCA</color>
+    <color name="DarkBlue">#032E3D</color>
+    <color name="Transparent">#00000000</color>
+    <color name="White">#FFFFFF</color>
+    <color name="Black">#000000</color>
+    <color name="Gray">#52626F</color>
+    <color name="Green">#66FF66</color>
+
+    <color name="ClassTextNormal">#00314B</color>
+    <color name="ClassFrameNormal">#001C41</color>
+    <color name="ClassFramePressed">#FF545A</color>
+    <color name="ClassContentPressed">#FF686D</color>
+
+    <color name="MedicateString">#546270</color>
+    <color name="MedicateLine">#CFCFCF</color>
+
+    <color name="TemperatureColor">#B2E790</color>
 </resources>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="main_menu_array">
+        <item>@string/Register</item>
+        <item>@string/CheckIn</item>
+        <item>@string/SayHi</item>
+        <item>@string/MedicateRemind</item>
+        <item>@string/BodyTemperatureMeasure</item>
+        <item>@string/PickUp</item>
+        <item>@string/Manage</item>
+    </string-array>
+
+    <integer-array name="main_menu_icon_array">
+        <item>@mipmap/btn_register</item>
+        <item>@mipmap/btn_checkin</item>
+        <item>@mipmap/btn_sayhi</item>
+        <item>@mipmap/btn_medialert</item>
+        <item>@mipmap/btn_temperature</item>
+        <item>@mipmap/btn_pickup</item>
+        <item>@mipmap/btn_member_manage</item>
+    </integer-array>
+
+    <string-array name="gender_array">
+        <item>@string/Boy</item>
+        <item>@string/Girl</item>
+    </string-array>
+
+    <string-array name="morning_arrary">
+        <item>@string/morning1</item>
+        <item>@string/morning2</item>
+        <item>@string/morning3</item>
+        <item>@string/morning4</item>
+        <item>@string/morning5</item>
+        <item>@string/morning6</item>
+        <item>@string/morning7</item>
+        <item>@string/morning8</item>
+        <item>@string/morning9</item>
+        <item>@string/morning10</item>
+    </string-array>
+
+    <string-array name="afternoon_arrary">
+        <item>@string/afternoon1</item>
+        <item>@string/afternoon2</item>
+        <item>@string/afternoon3</item>
+        <item>@string/afternoon4</item>
+        <item>@string/afternoon5</item>
+        <item>@string/afternoon6</item>
+        <item>@string/afternoon7</item>
+    </string-array>
+
+    <string-array name="noon_array">
+        <item>@string/noon1</item>
+        <item>@string/noon2</item>
+        <item>@string/noon3</item>
+        <item>@string/noon4</item>
+        <item>@string/noon5</item>
+        <item>@string/noon6</item>
+        <item>@string/noon7</item>
+        <item>@string/noon8</item>
+    </string-array>
+
+    <string-array name="night_arrary">
+        <item>@string/night1</item>
+        <item>@string/night2</item>
+        <item>@string/night3</item>
+        <item>@string/night4</item>
+        <item>@string/night5</item>
+        <item>@string/night6</item>
+        <item>@string/night7</item>
+        <item>@string/night8</item>
+        <item>@string/night9</item>
+    </string-array>
+
+    <string-array name="medicate_settings_array">
+        <item>@string/MedicateTimeSetting</item>
+    </string-array>
+
+    <integer-array name="medicate_settings_icon_array">
+        <item>@mipmap/btn_timesetting</item>
+    </integer-array>
+
+    <string-array name="checkin_menu_array">
+        <item>@string/IntoSchoolCheckIn</item>
+        <item>@string/LeaveSchoolCheckIn</item>
+        <item>@string/ManualCheckIn</item>
+        <item>@string/LeaveManagement</item>
+    </string-array>
+
+    <integer-array name="checkin_menu_icon_array">
+        <item>@mipmap/btn_checkin_into</item>
+        <item>@mipmap/btn_checkin_leave</item>
+        <item>@mipmap/btn_checkin_manual</item>
+        <item>@mipmap/btn_checkin_leavemanage</item>
+    </integer-array>
+
+    <string-array name="teacher_manage_array">
+        <item>@string/DataSearch</item>
+        <item>@string/Setting</item>
+    </string-array>
+
+    <integer-array name="teacher_manage_icon_array">
+        <item>@mipmap/btn_teacher_search</item>
+        <item>@mipmap/btn_teacher_setting</item>
+    </integer-array>
+
+    <string-array name="export_title_array">
+        <item>@string/export_title_1</item>
+        <item>@string/export_title_2</item>
+        <item>@string/export_title_3</item>
+        <item>@string/export_title_4</item>
+        <item>@string/export_title_5</item>
+        <item>@string/export_title_6</item>
+        <item>@string/export_title_7</item>
+        <item>@string/export_title_8</item>
+    </string-array>
+
+</resources>
