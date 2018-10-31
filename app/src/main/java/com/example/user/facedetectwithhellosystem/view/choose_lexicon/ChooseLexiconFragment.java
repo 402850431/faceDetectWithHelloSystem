@@ -60,6 +60,7 @@ public class ChooseLexiconFragment extends Fragment {
             case R.id.menuComplete:
                 spf.edit()
                         .putInt("selectedLexicon", chooseLexiconAdapter.getLastCheckedPosition())
+                        .putString("selectedLexiconName", tableList.get(chooseLexiconAdapter.getLastCheckedPosition()))
                         .apply();
                 return true;
         }

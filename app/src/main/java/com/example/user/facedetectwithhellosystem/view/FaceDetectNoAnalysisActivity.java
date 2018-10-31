@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -18,12 +19,14 @@ import com.crashlytics.android.Crashlytics;
 import com.example.user.facedetectwithhellosystem.R;
 import com.example.user.facedetectwithhellosystem.callback.ApiAsyncTaskCallback;
 import com.example.user.facedetectwithhellosystem.callback.RobotUtilCallback;
+import com.example.user.facedetectwithhellosystem.database.MySQLite;
 import com.example.user.facedetectwithhellosystem.mibo.Mibo;
 import com.example.user.facedetectwithhellosystem.utility.AllNetwork;
 import com.example.user.facedetectwithhellosystem.utility.ApiAsyncTask;
 import com.example.user.facedetectwithhellosystem.utility.FirebaseAnalyticsManager;
 import com.example.user.facedetectwithhellosystem.utility.RobotUtil;
 import com.example.user.facedetectwithhellosystem.utility.TransformUtil;
+import com.example.user.facedetectwithhellosystem.view.choose_lexicon.choose_lexicon_word.Word;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,6 +54,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -73,6 +77,7 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
     private RobotUtil robotUtil;
     private Mibo mibo;
     private ArrayList<Bitmap> faceArray;
+    MySQLite mySQLite;
 
     private final String SchoolData = "SchoolData", SID = "sID";
     private Resources resources;
@@ -91,6 +96,8 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
     private boolean isDebug = true;
     private final int debugView = 11111;
     private TextView debug_text;
+    SharedPreferences spf;
+    ArrayList<Word> wordsList;
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -161,6 +168,9 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
     }
 
     private void init() {
+        mySQLite = new MySQLite(this);
+        spf = PreferenceManager.getDefaultSharedPreferences(this);
+
         debug_text = findViewById(R.id.debug_text);
         if (isDebug)
             debug_text.setVisibility(View.VISIBLE);
@@ -306,10 +316,10 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
         Log.e(TAG, "faceArray - " + facesArray.length);
         if (isDebug) {
             String result = "";
-            if (facesArray.length > 1) {
-                isOverOnePerson = true;
-                result = resources.getString(R.string.TooManyPeople);
-            }
+//            if (facesArray.length > 1) {
+//                isOverOnePerson = true;
+//                result = resources.getString(R.string.TooManyPeople);
+//            }
 
             Message msg = new Message();
             msg.what = debugView;
@@ -458,18 +468,18 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
             if (_res.length == 3) {
                 if (_res[1].equals("200")) {
 
-                        /*
                     try {
                         JSONObject jsonObject = new JSONObject(_res[0]);
                         String status = jsonObject.getString(resources.getString(R.string.FaceAPIStatus));
                         if (status.equals(resources.getString(R.string.FaceAPIOK))) {
                             //region faceRecognition
                             String pID = jsonObject.getString("pid");
-                            String finalName = FirebaseDataManager.getInstance(this).getName(pID);
-                            Log.i(TAG, "finalName - " + finalName);
-                            if (!finalName.equals("")) {
+//                            String finalName = FirebaseDataManager.getInstance(this).getName(pID);
+                            String finalName = "";
+//                            Log.i(TAG, "finalName - " + finalName);
+//                            if (!finalName.equals("")) {
                                 sayHi(pID, finalName, _count);
-                            }
+//                            }
 
                         } else if (status.equals(resources.getString(R.string.Warning))) {
                             firebaseAnalyticsManager.putErrorMessage(kind, jsonObject.getString(resources.getString(R.string.FaceAPIMessage)));
@@ -488,7 +498,6 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-*/
                 } else {
                     String message = "";
                     if (_res[1].equals(resources.getString(R.string.Error))) {
@@ -584,17 +593,18 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
             mLastSpeakTime = getCurrentTimestamp();
             mLastSpeakName = name;
 
-            if (name.equals("")) {
-                System.out.println("name.equals(\"\")");
-//                robotUtil.robotSpeak(resources.getString(R.string.WhoAreYou));
-                    mibo.speak(String.format(resources.getString(R.string.WhoAreYou)));
-
-                return;
-            }
+//            if (name.equals("")) {
+//                System.out.println("name.equals(\"\")");
+////                robotUtil.robotSpeak(resources.getString(R.string.WhoAreYou));
+//                    mibo.speak(String.format(resources.getString(R.string.WhoAreYou)));
+//
+//                return;
+//            }
 
             String speakStr = name;
 
 //            int ranNum = ((int) (Math.random() * 99)) % 6; // 0 - 99
+            /*
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
             Date date = new Date();
             String nowTime = simpleDateFormat.format(date);
@@ -610,9 +620,22 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
             } else {
                 speakStr += nights[getRandom(nights.length)];
             }
+            */
 
-//            robotUtil.robotSpeak(speakStr);
-                mibo.speak(speakStr);
+            String selectedLexiconName = spf.getString("selectedLexiconName", "");
+            if (selectedLexiconName!=null){
+                if (mySQLite.isTableExists(selectedLexiconName)) {
+                    wordsList = mySQLite.getRows(selectedLexiconName);
+                    Random random = new Random();
+                    speakStr += wordsList.get(random.nextInt(wordsList.size())).getWord();
+//                    speakStr += nights[getRandom(nights.length)];
+                }
+            }
+
+            robotUtil.robotSpeak(speakStr);
+            mibo.speak(speakStr);
+
+            return;
         }
 
         Log.i(TAG, "FunctestTime " + _count + " - sayHi() stop");
