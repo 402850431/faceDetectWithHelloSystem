@@ -72,7 +72,7 @@ public class AllNetwork {
 
             if (header != null) {
                 for (Map.Entry<String, String> entry : ((Map<String, String>) header).entrySet()) {
-                    conn.setRequestProperty(entry.getKey().toString(), entry.getValue().toString());
+                    conn.setRequestProperty(entry.getKey(), entry.getValue());
                 }
             }
 
