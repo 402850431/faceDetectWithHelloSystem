@@ -235,8 +235,9 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
         if (isZenbo) {
             robotUtil.changeSetting(this, this);
             robotUtil.Resume();
+
             if (isSearchFace) {
-                robotUtil.robotExpression(RobotFace.HAPPY);
+//                robotUtil.robotExpression(RobotFace.HAPPY);
             }
         }
     }
@@ -246,6 +247,7 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
         if (mOpenCvCameraView != null)
             mOpenCvCameraView.disableView();
         robotUtil.robotStop();
+        mibo.release();
     }
 
     //opencv life cycle
@@ -623,7 +625,7 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
             */
 
             String selectedLexiconName = spf.getString("selectedLexiconName", "");
-            if (selectedLexiconName!=null){
+            if (!selectedLexiconName.isEmpty()){
                 if (mySQLite.isTableExists(selectedLexiconName)) {
                     wordsList = mySQLite.getRows(selectedLexiconName);
                     Random random = new Random();
