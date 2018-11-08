@@ -1,5 +1,6 @@
 package com.example.user.facedetectwithhellosystem.view;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,6 +23,7 @@ import com.example.user.facedetectwithhellosystem.callback.ApiAsyncTaskCallback;
 import com.example.user.facedetectwithhellosystem.callback.RobotUtilCallback;
 import com.example.user.facedetectwithhellosystem.database.MySQLite;
 import com.example.user.facedetectwithhellosystem.mibo.Mibo;
+import com.example.user.facedetectwithhellosystem.tools.ReplaceFragment;
 import com.example.user.facedetectwithhellosystem.utility.AllNetwork;
 import com.example.user.facedetectwithhellosystem.utility.ApiAsyncTask;
 import com.example.user.facedetectwithhellosystem.utility.FirebaseAnalyticsManager;
@@ -150,6 +153,10 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayShowHomeEnabled(true);
+        }
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_cv2_face_detect);
         try {
@@ -165,6 +172,16 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
         }
 
         init();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void init() {
@@ -437,7 +454,7 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
             String speakStr = name;
 
             String selectedLexiconName = spf.getString("selectedLexiconName", "");
-            if (!selectedLexiconName.isEmpty()){
+            if (!selectedLexiconName.isEmpty()&& this.mySQLite.isTableExists(selectedLexiconName)){
                 if (mySQLite.isTableExists(selectedLexiconName)) {
                     wordsList = mySQLite.getRows(selectedLexiconName);
                     Random random = new Random();

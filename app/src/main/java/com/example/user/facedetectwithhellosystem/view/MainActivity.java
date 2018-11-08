@@ -1,6 +1,7 @@
 package com.example.user.facedetectwithhellosystem.view;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
@@ -29,8 +31,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (getSupportActionBar()!=null)
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
         findViewByIds();
         setUpOnClicks();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (getSupportActionBar()!=null)
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
+        return false;
     }
 
     private void setUpOnClicks() {
