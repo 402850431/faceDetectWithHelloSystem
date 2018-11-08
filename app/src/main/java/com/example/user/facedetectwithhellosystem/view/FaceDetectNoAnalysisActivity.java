@@ -153,10 +153,10 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayShowHomeEnabled(true);
-        }
+//        ActionBar actionBar = getActionBar();
+//        if (actionBar != null) {
+//            actionBar.setDisplayShowHomeEnabled(true);
+//        }
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_cv2_face_detect);
         try {
@@ -174,15 +174,15 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
         init();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                onBackPressed();
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     private void init() {
         mySQLite = new MySQLite(this);
@@ -254,7 +254,11 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
             robotUtil.Resume();
 
             if (isSearchFace) {
-//                robotUtil.robotExpression(RobotFace.HAPPY);
+                robotUtil.robotExpression(RobotFace.HAPPY);
+                View decorView = getWindow().getDecorView();
+                int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN;
+                decorView.setSystemUiVisibility(uiOptions);
             }
         }
     }
@@ -412,10 +416,10 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
 
                 }
             }
+            sayHi(null, "", _count);
 
         }
 
-        sayHi(null, "", _count);
         Log.i(TAG, "FunctestTime " + _count + " - faceDetection() over");
         return rgbFrame;
 

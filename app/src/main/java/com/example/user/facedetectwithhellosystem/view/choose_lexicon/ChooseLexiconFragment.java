@@ -71,6 +71,7 @@ public class ChooseLexiconFragment extends Fragment {
                         .putInt("selectedLexicon", chooseLexiconAdapter.getLastCheckedPosition())
                         .putString("selectedLexiconName", tableList.get(chooseLexiconAdapter.getLastCheckedPosition()))
                         .apply();
+                Toast.makeText(getContext(), R.string.editSuccess, Toast.LENGTH_SHORT).show();
                 return true;
             case android.R.id.home:
                 new ReplaceFragment(getContext()).backToPreviousFragment(getFragmentManager());
@@ -84,7 +85,9 @@ public class ChooseLexiconFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         findViewByIds(view);
         setUpOnClicks(view);
-        setUpRv();
+        if (mySQLite.isHasTable()) {
+            setUpRv();
+        }
     }
 
     private void setUpRv() {

@@ -15,7 +15,7 @@ public class  MySQLite extends SQLiteOpenHelper {
 
     private final static String DATABASE_NAME = "my_lexicon_database";
     private final static int DATABASE_VERSION = 1;
-    private final static String TABLE_NAME = "table1";
+    private final static String TABLE_NAME = "defaultTable_DoNotUseThisTable";
     private final static String _ID = "_id";
     private final static String WORD = "word";
 
@@ -84,18 +84,26 @@ public class  MySQLite extends SQLiteOpenHelper {
         }
     }
 
-    public boolean isHasAnyTable () {
+    public boolean isHasTable () {
         if (database == null || !database.isOpen())
         {
             return false;
         }
-        String query = "SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name != 'android_metadata' AND name != 'sqlite_sequence'"; //sqlite_sequence // order by name
+        String query = "SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name != 'android_metadata' AND name != 'sqlite_sequence' AND name != 'defaultTable_DoNotUseThisTable'"; //sqlite_sequence // order by name
         Cursor cursor = database.rawQuery(query, null); //SELECT COUNT(*)
 //        while (cursor.moveToNext()) {
 //            int count = cursor.getCount();
 //        }
         int count = cursor.getCount();
+        if (count > 0) {
+            String query2 = "SELECT name FROM sqlite_master WHERE type='table' AND name!='android_metadata' AND name!='sqlite_sequence' AND name != 'defaultTable_DoNotUseThisTable'"; //sqlite_sequence // order by name
+            Cursor cursor2 = database.rawQuery(query2, null);
+            while(cursor2.moveToNext()){
+                Log.e(">>>name", cursor2.getString(cursor2.getColumnIndex("name")));
+            }
+        }
         cursor.close();
+        Log.e(">>>count", String.valueOf(count));
         return count > 0;
     }
 
@@ -117,12 +125,13 @@ public class  MySQLite extends SQLiteOpenHelper {
     }
 
     public ArrayList<String> getTables(){
-        String query = "SELECT name FROM sqlite_master WHERE type='table' AND name!='android_metadata' AND name!='sqlite_sequence' "; //sqlite_sequence // order by name
+        String query = "SELECT name FROM sqlite_master WHERE type='table' AND name!='android_metadata' AND name!='sqlite_sequence' AND name != 'defaultTable_DoNotUseThisTable'"; //sqlite_sequence // order by name
         Cursor cursor = database.rawQuery(query, null);
         ArrayList<String> list = new ArrayList<>();
 
         while(cursor.moveToNext()){
             list.add(cursor.getString(cursor.getColumnIndex("name")));
+            Log.e(">>>name", cursor.getString(cursor.getColumnIndex("name")));
         }
 
         cursor.close();

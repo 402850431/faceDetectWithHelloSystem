@@ -78,7 +78,6 @@ public class NewLexiconFragment extends Fragment {
                 }
                 mySQLite.close();
                 Toast.makeText(getContext(), R.string.newSuccess, Toast.LENGTH_SHORT).show();
-//                new ReplaceFragment(getContext()).replace(getFragmentManager(), R.id.mainFrame, new ManageLexiconFragment());
                 new ReplaceFragment(getContext()).backToPreviousFragment(getFragmentManager());
                 return true;
             case android.R.id.home:
@@ -111,6 +110,7 @@ public class NewLexiconFragment extends Fragment {
                 if (arrayList.size()<20) {
                     arrayList.add(newWordEt.getText().toString());
                     recyclerView.getAdapter().notifyItemInserted(arrayList.size());
+                    newWordEt.getText().clear();
                 } else {
                     new AlertDialog.Builder(getContext())
                             .setTitle(R.string.maximumIs20)

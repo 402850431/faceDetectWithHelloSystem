@@ -34,7 +34,7 @@
 
     <string name="BabyPlus">Baby+</string>
     <string name="Kindergarten">幼兒園園所</string>
-    <string name="Loading">讀取中...</string>
+    <string name="Loading">讀取中…</string>
     <string name="Register">註冊</string>
     <string name="PickUp">接送</string>
     <string name="PickUpNotice">接送通知</string>
@@ -42,7 +42,7 @@
     <string name="GenderNecessary">性別*</string>
     <string name="Gender">性別</string>
     <string name="BirthdayNecessary">出生日期*</string>
-    <string name="BirthdayDefault">1990-01-01</string>
+    <string name="BirthdayDefault">1990–01-01</string>
     <string name="Class">班級</string>
     <string name="Parent">監護人手機</string>
     <string name="Relation">關係</string>
@@ -69,7 +69,7 @@
     <string name="ChooseZenboClass">請選擇Zenbo服務的班級</string>
     <string name="Finish">完成</string>
     <string name="Delete">刪除</string>
-    <string name="Deleted">刪除中...</string>
+    <string name="Deleted">刪除中…</string>
     <string name="DeleteError">刪除失敗</string>
     <string name="DeleteCheck">確定要刪除%1$s的全部資料嗎?</string>
     <string name="PleaseOpenPermissions">請開啟權限</string>
@@ -94,7 +94,7 @@
     <string name="MedicateThreeLimitTime">11:01</string>
     <string name="MedicateTwoLimitTime">15:01</string>
     <string name="MedicateDeleteTime">23:55</string>
-    <string name="MedicateDelteTodyDefault">2017-08-03</string>
+    <string name="MedicateDelteTodyDefault">2017–08-03</string>
     <string name="TakingMedicateStudent">%1$s共有%2$d位小朋友要吃藥,分別是</string>
     <string name="RegisteredError">驗證碼錯誤</string>
     <string name="PleaseInputRegistered">請輸入驗證碼</string>
@@ -312,4 +312,6 @@
     <string name="tableIsEmpty">尚未有任何詞庫，請先新增詞庫</string>
     <string name="oldWordName">舊字詞名稱</string>
     <string name="newWordName">新字詞名稱</string>
+    <string name="tableSizeCanNotBeZero">這是唯一的詞庫，請增加新詞庫再刪除</string>
+    <string name="canNotDeleteSelectedTable">若要刪除已選定的詞庫，請先改選其他詞庫</string>
 </resources>

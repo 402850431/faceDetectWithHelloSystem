@@ -94,21 +94,30 @@ public class ChooseLexiconAdapter extends RecyclerView.Adapter<ChooseLexiconAdap
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e(">>>delete", ":)");
+
                 new AlertDialog.Builder(context)
                         .setTitle(R.string.areYouSureToDelete)
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mySQLite.deleteTable(arrayList.get(holder.getAdapterPosition()));
-                                Toast.makeText(context, R.string.deleteSuccess, Toast.LENGTH_SHORT).show();
-                                arrayList.remove(holder.getAdapterPosition());
-                                notifyItemRemoved(holder.getAdapterPosition());
+
+                                if (holder.getAdapterPosition() == lastCheckedPosition) {
+                                    Toast.makeText(context, R.string.canNotDeleteSelectedTable, Toast.LENGTH_SHORT).show();
+                                } else if (arrayList.size() < 2) {
+                                        Toast.makeText(context, R.string.tableSizeCanNotBeZero, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    mySQLite.deleteTable(arrayList.get(holder.getAdapterPosition()));
+                                    Toast.makeText(context, R.string.deleteSuccess, Toast.LENGTH_SHORT).show();
+                                    arrayList.remove(holder.getAdapterPosition());
+                                    notifyItemRemoved(holder.getAdapterPosition());
+
+                                }
                             }
                         })
                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
                             }
                         })
                         .show();
@@ -137,7 +146,7 @@ public class ChooseLexiconAdapter extends RecyclerView.Adapter<ChooseLexiconAdap
             chooseBtn = itemView.findViewById(R.id.chooseBtn);
             deleteBtn = itemView.findViewById(R.id.deleteBtn);
             checkBox = itemView.findViewById(R.id.checkbox);
-
+            final ArrayList<String> tableList = mySQLite.getTables();
             chooseBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -145,6 +154,11 @@ public class ChooseLexiconAdapter extends RecyclerView.Adapter<ChooseLexiconAdap
                     lastCheckedPosition = getAdapterPosition();
                     notifyItemChanged(copyOfLastCheckedPosition);
                     notifyItemChanged(lastCheckedPosition);
+
+                    PreferenceManager.getDefaultSharedPreferences(context).edit()
+                            .putInt("selectedLexicon", getAdapterPosition())
+                            .putString("selectedLexiconName", tableList.get(getAdapterPosition()))
+                            .apply();
                 }
             });
 

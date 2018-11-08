@@ -1,7 +1,6 @@
 package com.example.user.facedetectwithhellosystem.view;
 
 import android.Manifest;
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,25 +31,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (getSupportActionBar()!=null)
-            getSupportActionBar().setDisplayShowHomeEnabled(false);
         findViewByIds();
         setUpOnClicks();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (getSupportActionBar()!=null)
-            getSupportActionBar().setDisplayShowHomeEnabled(false);
-        return false;
     }
 
     private void setUpOnClicks() {
         faceDetectImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e(">>>onclick", "onclick");
-                if (mySQLite.isHasAnyTable()) {
+                if (mySQLite.isHasTable()) {
                     if (ContextCompat.checkSelfPermission(MainActivity.this,
                             Manifest.permission.CAMERA)
                             != PackageManager.PERMISSION_GRANTED) {
