@@ -58,7 +58,7 @@ import java.util.Random;
 
 import io.fabric.sdk.android.Fabric;
 
-public class FaceDetectNoAnalysisActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2, ApiAsyncTaskCallback, RobotUtilCallback {
+public class FaceDetectNoAnalysisActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2, RobotUtilCallback {
 
     private static final String TAG = "FF::Activity";
     private static final Scalar FACE_RECT_COLOR = new Scalar(0, 255, 0, 255);
@@ -364,7 +364,6 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
 
             Imgproc.resize(face, face150, new Size(faceWH, faceWH));
 
-
             Imgproc.rectangle(rgbFrame, squareFaceRect.tl(), squareFaceRect.br(), FACE_RECT_COLOR, 3);
 
             //FaceDataManager.getInstance().addFace(face150);
@@ -399,35 +398,11 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
 
         }
 
+        sayHi(null, "", _count);
         Log.i(TAG, "FunctestTime " + _count + " - faceDetection() over");
         return rgbFrame;
 
     }
-
-/*
-    private void turnFaceListActivity() {
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        String _base64Array = "";
-        for (Bitmap _bitmap : faceArray) {
-            _base64Array += transformUtil.bitmapToBase64(_bitmap) + ";";
-        }
-        SharedPreferences sharedPreferences = getSharedPreferences(FaceData, 0);
-        sharedPreferences.edit()
-                .putString(Base64Data, _base64Array)
-                .commit();
-
-        Intent intent = new Intent();
-        intent.setClass(FaceDetectNoAnalysisActivity.this, FaceListActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        finish();
-    }
-*/
 
     public void asyncSearchFaceRequest(String base64Data, int _count) {
         Log.i(TAG, "FunctestTime " + _count + " - asyncSearchFaceRequest() start");
@@ -437,8 +412,6 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
         dataToSend.put("k", "9");
         dataToSend.put("schoolid", sID);
         startAsyncRequestTime = System.currentTimeMillis();
-        new ApiAsyncTask(this, allNetwork, this).execute(allNetwork.faceRecognition, allNetwork.Http_Face + allNetwork.faceRecognition + "?" + transformUtil.getEncodedData(dataToSend), String.valueOf(_count));
-
 
         Log.i(TAG, "FunctestTime " + _count + " - asyncSearchFaceRequest() over");
     }
@@ -448,181 +421,20 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
         return tsLong.toString();
     }
 
-    @Override
-    public void onApiAsyncTaskFinished(String kind, String result) {
-        Log.i(TAG, "kind - " + kind + "\nresult - " + result);
-        firebaseAnalyticsManager.logFaceRecognitionAPITime(System.currentTimeMillis() - startAsyncRequestTime);
-        Log.e(TAG, "onApiAsyncTaskFinished time diff - " + String.valueOf(System.currentTimeMillis() - startAsyncRequestTime));
-        startAsyncRequestTime = 0;
-
-
-        int _count = -1;
-        String[] _rescc = result.split(";;;");
-        if (_rescc.length == 3)
-            _count = Integer.parseInt(_rescc[2]);
-        Log.i(TAG, "FunctestTime " + _count + " - onApiAsyncTaskFinished() start");
-
-        if (isSearchFace) {
-//            Log.d("ffapi", "got response!!");
-//            Log.d("ffapi", "kind - " + kind + "\nresult - " + result);
-            String[] _res = result.split(";;;");
-
-            if (_res.length == 3) {
-                if (_res[1].equals("200")) {
-
-                    try {
-                        JSONObject jsonObject = new JSONObject(_res[0]);
-                        String status = jsonObject.getString(resources.getString(R.string.FaceAPIStatus));
-                        if (status.equals(resources.getString(R.string.FaceAPIOK))) {
-                            //region faceRecognition
-                            String pID = jsonObject.getString("pid");
-//                            String finalName = FirebaseDataManager.getInstance(this).getName(pID);
-                            String finalName = "";
-//                            Log.i(TAG, "finalName - " + finalName);
-//                            if (!finalName.equals("")) {
-                                sayHi(pID, finalName, _count);
-//                            }
-
-                        } else if (status.equals(resources.getString(R.string.Warning))) {
-                            firebaseAnalyticsManager.putErrorMessage(kind, jsonObject.getString(resources.getString(R.string.FaceAPIMessage)));
-//                            System.out.println("system ~~~ 沒有臉 ~~~");
-                        } else if (status.equals(resources.getString(R.string.Error))) {
-                            String message = jsonObject.getString(resources.getString(R.string.FaceAPIMessage));
-                            if (message.equals(resources.getString(R.string.Stranger))) {
-//                                System.out.println("system ~~~ 陌生人 ~~~");
-                                sayHi(null, "", _count);
-                            }
-                            firebaseAnalyticsManager.putErrorMessage(kind, message);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Log.d(TAG, "JSONException - " + e.toString());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    String message = "";
-                    if (_res[1].equals(resources.getString(R.string.Error))) {
-                        message = _res[0];
-                    } else {
-                        message = _res[1];
-                    }
-                    firebaseAnalyticsManager.putErrorMessage(kind, message);
-                }
-            }
-        }
-
-        Log.i(TAG, "FunctestTime " + _count + " - onApiAsyncTaskFinished() over");
-    }
-
-/*
-    private String parseNameFromJson(JSONArray jsonArray, int _count) {
-        Log.i(TAG, "FunctestTime " + _count + " - parseNameFromJson() start");
-
-        //測試用人臉資料
-        //老大 http://www.designboom.com/wp-content/uploads/2016/01/gesichtermix-celebrity-photoshop-mashup-designboom-012.jpg
-        //老二 https://static1.squarespace.com/static/5296565fe4b0aa5ff545349d/54efb393e4b0ad929f997bff/54efb3bfe4b0da6eadba4f4f/1425038362082/Portrait+Faces+and+Photography+141228.JPG
-        //老三 https://static1.squarespace.com/static/5296565fe4b0aa5ff545349d/54efb393e4b0ad929f997bff/54efb3c2e4b0da6eadba4f74/1425038395265/Portrait+Faces+and+Photography+150124-2.JPG
-        //老四 https://s-media-cache-ak0.pinimg.com/originals/2c/ff/ba/2cffba2ed5691025995918905f34a924.jpg
-        //老五 https://metrouk2.files.wordpress.com/2014/12/ad_153629868.jpg
-        //測試 http://www.short-haircut.com/wp-content/uploads/2013/04/Short-haircuts-for-oval-faces.jpg
-        //real person x1 : kobe
-
-        double DIST_THREASHOLD = 0.3;
-
-        try {
-            Map<String, Double> distMap = new HashMap<String, Double>(); //pid / dist
-            Map<String, Integer> voteMap = new HashMap<String, Integer>(); //pid / dist
-            String tmpPid;
-            double distFromJson = 0.0;
-            double distFromMap = 0.0;
-            int tmpVote = 1;
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject json = jsonArray.getJSONObject(i);
-                //TODO: check assert if json has no content with key "dist" and "pid"
-
-                tmpVote = 1;
-                tmpPid = json.getString("personid");
-                distFromJson = json.getDouble("dist");
-
-                if (distFromJson > DIST_THREASHOLD)
-                    continue;
-
-                if (distMap.containsKey(tmpPid)) {
-                    distFromMap = distMap.get(tmpPid);
-                }
-                distMap.put(tmpPid, distFromMap + distFromJson);
-
-                if (voteMap.containsKey(tmpPid)) {
-                    tmpVote = voteMap.get(tmpPid);
-                    tmpVote = tmpVote + 1;
-                }
-                voteMap.put(tmpPid, tmpVote);
-            }
-
-            //sort by map
-            int maxVotes = -1;
-            String maxPid = "";
-            for (Map.Entry<String, Integer> entry : voteMap.entrySet()) {
-                if (entry.getValue() > maxVotes) {
-                    maxVotes = entry.getValue();
-                    maxPid = entry.getKey();
-                }
-            }
-
-            Log.i(TAG, "FunctestTime " + _count + " - parseNameFromJson() over");
-            return maxVotes > 5 ? FirebaseDataManager.getInstance(this).getName(maxPid) : "";
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-
-        }
-
-        Log.i(TAG, "FunctestTime " + _count + " - parseNameFromJson() over");
-        return "";
-    }
-*/
-
     int speakCounter = 0;
 
     private void sayHi(String pID, String name, int _count) {
-        Log.i(TAG, "FunctestTime " + _count + " - sayHi() start");
+//        Log.e(TAG, ">>>FunctestTime " + _count + " - sayHi() start");
 
+        Log.e(">>>isSpeakFinish ", String.valueOf(isSpeakFinish));
+        Log.e(">>>Integer ", String.valueOf(Integer.valueOf(getCurrentTimestamp()) - Integer.valueOf(mLastSpeakTime) > 10));
 //        Log.d(TAG,String.valueOf(Integer.valueOf(mLastSpeakTime)));
-        if (isSpeakFinish && (Integer.valueOf(getCurrentTimestamp()) - Integer.valueOf(mLastSpeakTime) > 10 || mLastSpeakName != name)) {
+        if (isSpeakFinish && (Integer.valueOf(getCurrentTimestamp()) - Integer.valueOf(mLastSpeakTime) > 10 )) { //|| mLastSpeakName != name
 
             mLastSpeakTime = getCurrentTimestamp();
-            mLastSpeakName = name;
-
-//            if (name.equals("")) {
-//                System.out.println("name.equals(\"\")");
-////                robotUtil.robotSpeak(resources.getString(R.string.WhoAreYou));
-//                    mibo.speak(String.format(resources.getString(R.string.WhoAreYou)));
-//
-//                return;
-//            }
+//            mLastSpeakName = name;
 
             String speakStr = name;
-
-//            int ranNum = ((int) (Math.random() * 99)) % 6; // 0 - 99
-            /*
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
-            Date date = new Date();
-            String nowTime = simpleDateFormat.format(date);
-            String[] _now = nowTime.split(":");
-            int _total = Integer.parseInt(_now[0]) * 60 + Integer.parseInt(_now[1]);
-
-            if (6 * 60 <= _total && _total < 10 * 60 - 1) {
-                speakStr += mornings[getRandom(mornings.length)];
-            } else if (10 * 60 <= _total && _total < 13 * 60 - 1) {
-                speakStr += afternoons[getRandom(afternoons.length)];
-            } else if (13 * 60 <= _total && _total < 15 * 60 - 1) {
-                speakStr += noons[getRandom(noons.length)];
-            } else {
-                speakStr += nights[getRandom(nights.length)];
-            }
-            */
 
             String selectedLexiconName = spf.getString("selectedLexiconName", "");
             if (!selectedLexiconName.isEmpty()){
@@ -634,6 +446,7 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
                 }
             }
 
+            Log.e(">>>speakStr ", speakStr);
             robotUtil.robotSpeak(speakStr);
             mibo.speak(speakStr);
 
@@ -641,10 +454,6 @@ public class FaceDetectNoAnalysisActivity extends Activity implements CameraBrid
         }
 
         Log.i(TAG, "FunctestTime " + _count + " - sayHi() stop");
-    }
-
-    private int getRandom(int size) {
-        return ((int) (Math.random() * 999)) % size;
     }
 
     @Override

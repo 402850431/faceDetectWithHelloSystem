@@ -80,7 +80,7 @@ public class ChooseLexiconFragment extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(chooseLexiconAdapter);
-        final int storedPosition = spf.getInt("selectedLexicon", -1);
+        final int storedPosition = spf.getInt("selectedLexicon", 0);
         Log.e(">>>storedPosition", storedPosition +"");
 //        RecyclerView.ViewHolder childViewHolder = recyclerView.findViewHolderForAdapterPosition(storedPosition);
         recyclerView.post(new Runnable() {

@@ -74,7 +74,7 @@ public class  MySQLite extends SQLiteOpenHelper {
         return list;
     }
 
-    public void changeTableName (String oldTableName, String newTableName) {
+    public void changeTableName(String oldTableName, String newTableName) {
         database.beginTransaction();
         try{
             database.execSQL("ALTER TABLE " + oldTableName + " RENAME TO " + newTableName+";");
@@ -82,6 +82,21 @@ public class  MySQLite extends SQLiteOpenHelper {
         } finally{
             database.endTransaction();
         }
+    }
+
+    public boolean isHasAnyTable () {
+        if (database == null || !database.isOpen())
+        {
+            return false;
+        }
+        String query = "SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name != 'android_metadata' AND name != 'sqlite_sequence'"; //sqlite_sequence // order by name
+        Cursor cursor = database.rawQuery(query, null); //SELECT COUNT(*)
+//        while (cursor.moveToNext()) {
+//            int count = cursor.getCount();
+//        }
+        int count = cursor.getCount();
+        cursor.close();
+        return count > 0;
     }
 
     public boolean isTableExists(String tableName)
