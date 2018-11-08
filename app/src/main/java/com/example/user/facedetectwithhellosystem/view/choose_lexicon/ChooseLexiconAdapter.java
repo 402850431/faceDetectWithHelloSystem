@@ -48,7 +48,7 @@ public class ChooseLexiconAdapter extends RecyclerView.Adapter<ChooseLexiconAdap
         this.arrayList = arrayList;
         this.mySQLite = mySQLite;
         SharedPreferences spf = PreferenceManager.getDefaultSharedPreferences(context);
-        storedCheckedPosition = spf.getInt("selectedLexicon", -1);
+        storedCheckedPosition = spf.getInt("selectedLexicon", 0);
     }
 
     @Override

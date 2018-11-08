@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import com.example.user.facedetectwithhellosystem.R;
 import com.example.user.facedetectwithhellosystem.database.MySQLite;
 import com.example.user.facedetectwithhellosystem.tools.ReplaceFragment;
+import com.example.user.facedetectwithhellosystem.view.MainActivity;
 import com.example.user.facedetectwithhellosystem.view.ManageLexiconFragment;
 
 import java.util.ArrayList;
@@ -43,6 +45,13 @@ public class ChooseLexiconFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
+        if (getActivity()!=null) {
+            ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
+            if (actionBar!=null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+                actionBar.show();
+            }
+        }
         return inflater.inflate(R.layout.fragment_choose_lexicon, container, false);
     }
 
@@ -60,7 +69,11 @@ public class ChooseLexiconFragment extends Fragment {
             case R.id.menuComplete:
                 spf.edit()
                         .putInt("selectedLexicon", chooseLexiconAdapter.getLastCheckedPosition())
+                        .putString("selectedLexiconName", tableList.get(chooseLexiconAdapter.getLastCheckedPosition()))
                         .apply();
+                return true;
+            case android.R.id.home:
+                new ReplaceFragment(getContext()).backToPreviousFragment(getFragmentManager());
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -79,7 +92,7 @@ public class ChooseLexiconFragment extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(chooseLexiconAdapter);
-        final int storedPosition = spf.getInt("selectedLexicon", -1);
+        final int storedPosition = spf.getInt("selectedLexicon", 0);
         Log.e(">>>storedPosition", storedPosition +"");
 //        RecyclerView.ViewHolder childViewHolder = recyclerView.findViewHolderForAdapterPosition(storedPosition);
         recyclerView.post(new Runnable() {

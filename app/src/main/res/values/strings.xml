@@ -309,4 +309,7 @@
 
     <string name="disconnectBluetooth">已中斷藍芽連結</string>
     <string name="bluetoothConnectSuccess">藍芽連結成功</string>
+    <string name="tableIsEmpty">尚未有任何詞庫，請先新增詞庫</string>
+    <string name="oldWordName">舊字詞名稱</string>
+    <string name="newWordName">新字詞名稱</string>
 </resources>

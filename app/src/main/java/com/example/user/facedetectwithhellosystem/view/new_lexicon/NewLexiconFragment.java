@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.example.user.facedetectwithhellosystem.R;
 import com.example.user.facedetectwithhellosystem.database.MySQLite;
 import com.example.user.facedetectwithhellosystem.tools.ReplaceFragment;
+import com.example.user.facedetectwithhellosystem.view.MainActivity;
 import com.example.user.facedetectwithhellosystem.view.ManageLexiconFragment;
 import com.example.user.facedetectwithhellosystem.view.choose_lexicon.ChooseLexiconAdapter;
 
@@ -42,6 +44,15 @@ public class NewLexiconFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
+
+        if (getActivity()!=null) {
+            ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
+            if (actionBar!=null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+                actionBar.show();
+            }
+        }
+
         return inflater.inflate(R.layout.fragment_new_lexicon, container, false);
 
     }
@@ -67,7 +78,11 @@ public class NewLexiconFragment extends Fragment {
                 }
                 mySQLite.close();
                 Toast.makeText(getContext(), R.string.newSuccess, Toast.LENGTH_SHORT).show();
-                new ReplaceFragment(getContext()).replace(getFragmentManager(), R.id.mainFrame, new ManageLexiconFragment());
+//                new ReplaceFragment(getContext()).replace(getFragmentManager(), R.id.mainFrame, new ManageLexiconFragment());
+                new ReplaceFragment(getContext()).backToPreviousFragment(getFragmentManager());
+                return true;
+            case android.R.id.home:
+                new ReplaceFragment(getContext()).backToPreviousFragment(getFragmentManager());
                 return true;
         }
         return super.onOptionsItemSelected(item);
